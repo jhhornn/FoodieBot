@@ -1,17 +1,18 @@
 const moment = require("moment")
 const time = moment().format("h:mm a")
-const day = moment('date/utc format').format('dddd')
+const dayNum = moment().day()
+const day = moment.weekdays(dayNum)
 
 /**
  * Any change in command messages will require that you edit
  * some messages on the server
  */
 const commandMessages = [
-  "Press 1 to place an order",
-  "Press 99 to checkout order",
-  "Press 98 to see order history",
-  "Press 97 to see current history",
-  "Press 0 to cancel order"
+  "Press <b>1</b> to place an order",
+  "Press <b>99</b> to checkout order",
+  "Press <b>98</b> to see order history",
+  "Press <b>97</b> to see current history",
+  "Press <b>0</b> to cancel order"
 ]
 
 /**
@@ -38,7 +39,6 @@ function generateOrderHistory(orderObj, session) {
     items: orderObj
   }
 
-  //   const orderHistory = session.orderHistory
   session.orderHistory ? session.orderHistory : (session.orderHistory = {})
   console.log(session)
   console.log(session.order)
@@ -81,7 +81,7 @@ function printOrderHistory(orderHistory, year = undefined, month = undefined) {
       for (let month in orderHistory[year]) {
         message += `Order History for ${getMonthName(month)} ${year} <br> <br>`
         orderHistory[year][month].forEach((order, index) => {
-          message += `Order ${index + 1} - ${time}, ${day} <br> ${printCurrentOrder(order)} <br>`
+          message += `Order ${index + 1} - <i>${time}, ${day}</i> <br> ${printCurrentOrder(order)} <br>`
         })
       }
     }
@@ -89,20 +89,20 @@ function printOrderHistory(orderHistory, year = undefined, month = undefined) {
     for (let month in orderHistory[year]) {
       message += `Order History for ${getMonthName(month)} ${year} <br> <br>`
       orderHistory[year][month].forEach((order, index) => {
-        message += `Order ${index + 1} - ${time}, ${day} <br> ${printCurrentOrder(order)} <br>`
+        message += `Order ${index + 1} - <i>${time}, ${day}</i> <br> ${printCurrentOrder(order)} <br>`
       })
     }
   } else if (year && month) {
     message += `Order History for ${getMonthName(month)} ${year} <br> <br>`
     orderHistory[year][month].forEach((order, index) => {
-      message += `Order ${index + 1} - ${time}, ${day} <br> ${printCurrentOrder(order)} <br>`
+      message += `Order ${index + 1} - <i>${time}, ${day}</i> <br> ${printCurrentOrder(order)} <br>`
     })
   } else if (!year && month) {
     for (let year in orderHistory) {
       if (orderHistory[year][month]) {
         message += `Order History for ${month} ${year} <br>`
         orderHistory[year][month].forEach((order, index) => {
-          message += `Order ${index + 1} - ${time}, ${day} <br> ${printCurrentOrder(order)} <br>`
+          message += `Order ${index + 1} - <i>${time}, ${day}</i> <br> ${printCurrentOrder(order)} <br>`
         })
       }
     }
@@ -136,7 +136,7 @@ function printCurrentOrder(order) {
     )} each ---  #${getItemsPrice(item) * order.items[item]} <br>`
     total += getItemsPrice(item) * order.items[item]
   }
-  message += `Total: #${total}`
+  message += `<b>Total: #${total}</b>`
   return message
 }
 

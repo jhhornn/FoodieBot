@@ -47,9 +47,9 @@ async function placeOrder(io, socket, userReply, session) {
     socket.emit(
       "message",
       formatMessage(
-        `Added ${1} ${item.item}(s) to your order. Your total is now #${
+        `Added <b>${1} ${item.item}(s)</b> to your order. Your total is now #${
           session.order.total
-        }. What else would you like? <br> <br> Press the item number to order more  or <br> Press 1 to view available items <br> Press 97 to view order(s)`,
+        }. What else would you like? <br> <br> Press the item number to order more  or <br> Press <b>1</b> to view available items <br> Press <b>97</b> to view order(s)`,
         bot
       )
     )
@@ -65,7 +65,7 @@ async function placeOrder(io, socket, userReply, session) {
     socket.emit(
       "message",
       formatMessage(
-        `Added ${itemOrder.quantity} ${item.item}(s) to your order. Your total is now #${session.order.total}. What else would you like? <br> <br> Press the order number or <br> Press 1 to view available items <br> Press 99 to check out order <br> press 0 to cancel order`,
+        `Added <b>${itemOrder.quantity} ${item.item}(s)<b> to your order. Your total is now <b>#${session.order.total}</b>. What else would you like? <br> <br> Press the order number or <br> Press <b>1</b> to view available items <br> Press <b>99</b> to check out order <br> press <b>0</b> to cancel order`,
         bot
       )
     )
@@ -78,7 +78,7 @@ async function checkOutOrder(io, socket, userReply, session) {
     socket.emit(
       "message",
       formatMessage(
-        `Your have no order to checkout. <br> <br> Press 1 to place order`,
+        `Your have no order to checkout. <br> <br> Press <b>1</b> to place order`,
         bot
       )
     )
@@ -91,7 +91,7 @@ async function checkOutOrder(io, socket, userReply, session) {
     socket.emit(
       "message",
       formatMessage(
-        `Your total is #${session.order.total}. Thank you for your order! <br> <br> Would you like to order more? Press 1 <br> Press 98 to print out order history`,
+        `Your total is <b>#${session.order.total}</b>. Thank you for your order! <br> <br> Would you like to order more? Press <b>1</b> <br> Press <b>98</b> to print out order history`,
         bot
       )
     )
@@ -110,7 +110,7 @@ async function orderHistory(io, socket, userReply, orderHistory) {
     socket.emit(
       "message",
       formatMessage(
-        `You have no order history <br> <br> Press 1 to make order`,
+        `You have no order history <br> <br> Press <b>1</b> to make order`,
         bot
       )
     )
@@ -140,7 +140,7 @@ async function currentOrder(io, socket, userReply, session) {
     socket.emit(
       "message",
       formatMessage(
-        `You have no current order <br> <br> Press 1 to make order`,
+        `You have no current order <br> <br> Press <b>1</b> to make order`,
         bot
       )
     )
@@ -151,7 +151,7 @@ async function currentOrder(io, socket, userReply, session) {
       formatMessage(
         `Your current order is: <br> <br> ${printCurrentOrder(
           session.order
-        )} <br> <br> Press 99 to checkout order <br> Press 0 to cancel order`,
+        )} <br> <br> Press <b>99</b> to checkout order <br> Press <b>0</b> to cancel order`,
         bot
       )
     )
@@ -164,7 +164,7 @@ async function cancelOrder(io, socket, userReply, session) {
     socket.emit(
         "message",
         formatMessage(
-          `You have no order to cancel. <br> <br> Press 1 to make order`,
+          `You have no order to cancel. <br> <br> Press <b>1</b> to make order`,
           bot
         )
       )
@@ -172,7 +172,7 @@ async function cancelOrder(io, socket, userReply, session) {
     socket.emit(
         "message",
         formatMessage(
-          `Your order has been cancelled. <br> <br> Press 1 to make order`,
+          `Your order has been cancelled. <br> <br> Press <b>1</b> to make order`,
           bot
         )
       )
