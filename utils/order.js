@@ -1,3 +1,7 @@
+const moment = require("moment")
+const time = moment().format("h:mm a")
+const day = moment('date/utc format').format('dddd')
+
 /**
  * Any change in command messages will require that you edit
  * some messages on the server
@@ -77,7 +81,7 @@ function printOrderHistory(orderHistory, year = undefined, month = undefined) {
       for (let month in orderHistory[year]) {
         message += `Order History for ${getMonthName(month)} ${year} <br> <br>`
         orderHistory[year][month].forEach((order, index) => {
-          message += `Order ${index + 1} <br> ${printCurrentOrder(order)} <br>`
+          message += `Order ${index + 1} - ${time}, ${day} <br> ${printCurrentOrder(order)} <br>`
         })
       }
     }
@@ -85,20 +89,20 @@ function printOrderHistory(orderHistory, year = undefined, month = undefined) {
     for (let month in orderHistory[year]) {
       message += `Order History for ${getMonthName(month)} ${year} <br> <br>`
       orderHistory[year][month].forEach((order, index) => {
-        message += `Order ${index + 1} <br> ${printCurrentOrder(order)} <br>`
+        message += `Order ${index + 1} - ${time}, ${day} <br> ${printCurrentOrder(order)} <br>`
       })
     }
   } else if (year && month) {
     message += `Order History for ${getMonthName(month)} ${year} <br> <br>`
     orderHistory[year][month].forEach((order, index) => {
-      message += `Order ${index + 1} <br> ${printCurrentOrder(order)} <br>`
+      message += `Order ${index + 1} - ${time}, ${day} <br> ${printCurrentOrder(order)} <br>`
     })
   } else if (!year && month) {
     for (let year in orderHistory) {
       if (orderHistory[year][month]) {
         message += `Order History for ${month} ${year} <br>`
         orderHistory[year][month].forEach((order, index) => {
-          message += `Order ${index + 1} <br> ${printCurrentOrder(order)} <br>`
+          message += `Order ${index + 1} - ${time}, ${day} <br> ${printCurrentOrder(order)} <br>`
         })
       }
     }
